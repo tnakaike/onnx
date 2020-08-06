@@ -17,6 +17,7 @@ class ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, CategoryMapper);
 class ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, DictVectorizer);
 class ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, FeatureVectorizer);
 class ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, Imputer);
+class ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, SeqImputer);
 class ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, LabelEncoder);
 class ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, LinearClassifier);
 class ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, LinearRegressor);
@@ -45,6 +46,7 @@ class OpSet_OnnxML_ver1 {
     fn(GetOpSchema<ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(
            OnnxML, 1, FeatureVectorizer)>());
     fn(GetOpSchema<ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, Imputer)>());
+    fn(GetOpSchema<ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, SeqImputer)>());
     fn(GetOpSchema<ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(
            OnnxML, 1, LabelEncoder)>());
     fn(GetOpSchema<ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(
