@@ -1165,5 +1165,35 @@ ONNX_ML_OPERATOR_SET_SCHEMA(
           }
         }));
 
+static const char* Date_ver1_doc = R"DOC(
+    Pases date strings.<br>
+)DOC";
+
+ONNX_ML_OPERATOR_SET_SCHEMA(
+    Date,
+    1,
+    OpSchema()
+        .SetDoc(Date_ver1_doc)
+        .Input(0, "X", "Data to be processed.", "T1")
+        .Output(0, "YM", "Months", "T2")
+        .Output(1, "YD", "Days in a year", "T2")
+        .Output(2, "MD", "Days in a month", "T2")
+        .Output(3, "WD", "Days in a week", "T2")
+        .Output(4, "H", "Hour", "T2")
+        .Output(5, "M", "Minute", "T2")
+        .TypeConstraint(
+            "T1",
+            {"tensor(string)"},
+            "The input type must be a tensor of a string type.")
+        .TypeConstraint(
+            "T2",
+            {"tensor(int32)"},
+            "The type of each output is a tensor of an int64 type.")
+        .Attr(
+            "format",
+            "Date format",
+            AttributeProto::STRING,
+            OPTIONAL_VALUE));
+
 } // namespace ONNX_NAMESPACE
 #endif
