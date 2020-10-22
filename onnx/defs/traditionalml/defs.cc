@@ -1195,5 +1195,27 @@ ONNX_ML_OPERATOR_SET_SCHEMA(
             AttributeProto::STRING,
             OPTIONAL_VALUE));
 
+static const char* ConcatStr_ver1_doc = R"DOC(
+    Concatenate strings.<br>
+)DOC";
+
+ONNX_ML_OPERATOR_SET_SCHEMA(
+    ConcatStr,
+    1,
+    OpSchema()
+        .SetDoc(ConcatStr_ver1_doc)
+        .Input(0, "X", "Strings to be concatenated.", "T")
+        .Input(1, "Y", "Strings to be concatenated.", "T")
+        .Output(0, "Z", "Concatenated strings", "T")
+        .TypeConstraint(
+            "T",
+            {"tensor(string)"},
+            "The type of each input must be a tensor of a string type. The output type is a tensor of a string type.")
+        .Attr(
+            "separator",
+            "String inserted between two input strings",
+            AttributeProto::STRING,
+            OPTIONAL_VALUE));
+
 } // namespace ONNX_NAMESPACE
 #endif
