@@ -1215,7 +1215,14 @@ ONNX_ML_OPERATOR_SET_SCHEMA(
             "separator",
             "String inserted between two input strings",
             AttributeProto::STRING,
-            OPTIONAL_VALUE));
+            OPTIONAL_VALUE)
+        .TypeAndShapeInferenceFunction([](InferenceContext& ctx) {
+          auto output_elem_type = ctx.getOutputType(0)->mutable_tensor_type();
+          output_elem_type->set_elem_type(TensorProto::STRING);
+
+          // Input and output shapes are the same.
+          propagateShapeFromInputToOutput(ctx, 0, 0);
+        }));
 
 } // namespace ONNX_NAMESPACE
 #endif
