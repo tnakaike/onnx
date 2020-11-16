@@ -1256,8 +1256,8 @@ ONNX_ML_OPERATOR_SET_SCHEMA(
     1,
     OpSchema()
         .SetDoc(RangeTransformer_ver1_doc)
-        .Input(0, "X", "Strings to be converted.", "T")
-        .Output(0, "Z", "Concatenated strings", "T")
+        .Input(0, "X", "Input tensor to be converted.", "T")
+        .Output(0, "Z", "Converted tensor", "tensor(float)")
         .TypeConstraint(
             "T",
             {"tensor(float)",
@@ -1273,9 +1273,13 @@ ONNX_ML_OPERATOR_SET_SCHEMA(
             "keys_lower_strings",
             "Lower keys of each rage",
             AttributeProto::STRING)
+        .Attr(
+            "values_float",
+            "Values for each rage",
+            AttributeProto::FLOATS)
         .TypeAndShapeInferenceFunction([](InferenceContext& ctx) {
           auto output_elem_type = ctx.getOutputType(0)->mutable_tensor_type();
-          output_elem_type->set_elem_type(TensorProto::STRING);
+          output_elem_type->set_elem_type(TensorProto::FLOAT);
 
           // Input and output shapes are the same.
           propagateShapeFromInputToOutput(ctx, 0, 0);
