@@ -1224,5 +1224,59 @@ ONNX_ML_OPERATOR_SET_SCHEMA(
           propagateShapeFromInputToOutput(ctx, 0, 0);
         }));
 
+static const char* StrLower_ver1_doc = R"DOC(
+    Convert all characters into lowercase characters.<br>
+)DOC";
+
+ONNX_ML_OPERATOR_SET_SCHEMA(
+    StrLower,
+    1,
+    OpSchema()
+        .SetDoc(StrLower_ver1_doc)
+        .Input(0, "X", "Strings to be converted.", "T")
+        .Output(0, "Z", "Result string", "T")
+        .TypeConstraint(
+            "T",
+            {"tensor(string)"},
+            "The type of each input must be a tensor of a string type. The output type is a tensor of a string type.")
+        .TypeAndShapeInferenceFunction([](InferenceContext& ctx) {
+          auto output_elem_type = ctx.getOutputType(0)->mutable_tensor_type();
+          output_elem_type->set_elem_type(TensorProto::STRING);
+
+          // Input and output shapes are the same.
+          propagateShapeFromInputToOutput(ctx, 0, 0);
+        }));
+
+static const char* RangeTransformer_ver1_doc = R"DOC(
+    Transform the input tensor based on the given range information.<br>
+)DOC";
+
+ONNX_ML_OPERATOR_SET_SCHEMA(
+    RangeTransformer,
+    1,
+    OpSchema()
+        .SetDoc(RangeTransformer_ver1_doc)
+        .Input(0, "X", "Strings to be converted.", "T")
+        .Output(0, "Z", "Concatenated strings", "T")
+        .TypeConstraint(
+            "T",
+            {"tensor(string)"},
+            "The type of each input must be a tensor of a string type. The output type is a tensor of a string type.")
+        .Attr(
+            "keys_upper_strings",
+            "Upper keys of each rage",
+            AttributeProto::STRING)
+        .Attr(
+            "keys_lower_strings",
+            "Lower keys of each rage",
+            AttributeProto::STRING)
+        .TypeAndShapeInferenceFunction([](InferenceContext& ctx) {
+          auto output_elem_type = ctx.getOutputType(0)->mutable_tensor_type();
+          output_elem_type->set_elem_type(TensorProto::STRING);
+
+          // Input and output shapes are the same.
+          propagateShapeFromInputToOutput(ctx, 0, 0);
+        }));
+
 } // namespace ONNX_NAMESPACE
 #endif

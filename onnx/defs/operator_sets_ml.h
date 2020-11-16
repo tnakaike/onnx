@@ -30,6 +30,8 @@ class ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, TreeEnsembleRegressor);
 class ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, ZipMap);
 class ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, Date);
 class ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, ConcatStr);
+class ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, StrLower);
+class ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, RangeTransformer);
 
 // Iterate over schema from ai.onnx.ml version 1
 class OpSet_OnnxML_ver1 {
@@ -70,6 +72,10 @@ class OpSet_OnnxML_ver1 {
     fn(GetOpSchema<ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(OnnxML, 1, Date)>());
     fn(GetOpSchema<ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(
            OnnxML, 1, ConcatStr)>());
+    fn(GetOpSchema<ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(
+           OnnxML, 1, StrLower)>());
+    fn(GetOpSchema<ONNX_OPERATOR_SET_SCHEMA_CLASS_NAME(
+           OnnxML, 1, RangeTransformer)>());
   }
 };
 
