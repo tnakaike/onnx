@@ -1285,5 +1285,36 @@ ONNX_ML_OPERATOR_SET_SCHEMA(
           propagateShapeFromInputToOutput(ctx, 0, 0);
         }));
 
+static const char* SplitStr_ver1_doc = R"DOC(
+    Split each string in a tensor.<br>
+)DOC";
+
+ONNX_ML_OPERATOR_SET_SCHEMA(
+    SplitStr,
+    1,
+    OpSchema()
+        .SetDoc(ConcatStr_ver1_doc)
+        .Input(0, "X", "Strings to be concatenated.", "T")
+        .Output(0, "Z", "Concatenated strings", "T")
+        .Attr(
+            "separator",
+            "String to split a string",
+            AttributeProto::STRING,
+            OPTIONAL_VALUE)
+        .Attr(
+            "index",
+            "Index to split a string",
+            AttributeProto::INT,
+            OPTIONAL_VALUE)
+        .Attr(
+            "keep",
+            "Index for a split string",
+            AttributeProto::INT,
+            OPTIONAL_VALUE)
+        .TypeAndShapeInferenceFunction([](InferenceContext& ctx) {
+          auto output_elem_type = ctx.getOutputType(0)->mutable_tensor_type();
+          output_elem_type->set_elem_type(TensorProto::STRING);
+        }));
+
 } // namespace ONNX_NAMESPACE
 #endif
