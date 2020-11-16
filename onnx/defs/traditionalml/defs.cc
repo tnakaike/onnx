@@ -1260,8 +1260,11 @@ ONNX_ML_OPERATOR_SET_SCHEMA(
         .Output(0, "Z", "Concatenated strings", "T")
         .TypeConstraint(
             "T",
-            {"tensor(string)"},
-            "The type of each input must be a tensor of a string type. The output type is a tensor of a string type.")
+            {"tensor(float)",
+             "tensor(double)",
+             "tensor(int64)",
+             "tensor(int32)"},
+            "The input must be a tensor of a numeric type.")
         .Attr(
             "keys_upper_strings",
             "Upper keys of each rage",
