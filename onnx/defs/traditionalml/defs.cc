@@ -1256,14 +1256,18 @@ ONNX_ML_OPERATOR_SET_SCHEMA(
     1,
     OpSchema()
         .SetDoc(RangeTransformer_ver1_doc)
-        .Input(0, "X", "Input tensor to be converted.", "T")
-        .Output(0, "Z", "Converted tensor", "tensor(float)")
+        .Input(0, "X", "Input tensor to be converted.", "T1")
+        .Output(0, "Z", "Converted tensor", "T2")
         .TypeConstraint(
-            "T",
+            "T1",
             {"tensor(float)",
              "tensor(double)",
              "tensor(int64)",
              "tensor(int32)"},
+            "The input must be a tensor of a numeric type.")
+        .TypeConstraint(
+            "T2",
+            {"tensor(float)"},
             "The input must be a tensor of a numeric type.")
         .Attr(
             "keys_upper_strings",
@@ -1293,9 +1297,13 @@ ONNX_ML_OPERATOR_SET_SCHEMA(
     SplitStr,
     1,
     OpSchema()
-        .SetDoc(ConcatStr_ver1_doc)
+        .SetDoc(SplitStr_ver1_doc)
         .Input(0, "X", "Strings to be concatenated.", "T")
-        .Output(0, "Z", "Concatenated strings", "T")
+        .Output(0, "Z", "A part of a split string", "T")
+        .TypeConstraint(
+            "T",
+            {"tensor(string)"},
+            "The type of each input must be a tensor of a string type. The output type is a tensor of a string type.")
         .Attr(
             "separator",
             "String to split a string",
@@ -1314,6 +1322,9 @@ ONNX_ML_OPERATOR_SET_SCHEMA(
         .TypeAndShapeInferenceFunction([](InferenceContext& ctx) {
           auto output_elem_type = ctx.getOutputType(0)->mutable_tensor_type();
           output_elem_type->set_elem_type(TensorProto::STRING);
+
+          // Input and output shapes are the same.
+          propagateShapeFromInputToOutput(ctx, 0, 0);
         }));
 
 } // namespace ONNX_NAMESPACE
