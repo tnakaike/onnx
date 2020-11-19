@@ -292,7 +292,8 @@ ONNX_ML_OPERATOR_SET_SCHEMA(
             {"tensor(float)",
              "tensor(double)",
              "tensor(int64)",
-             "tensor(int32)"},
+             "tensor(int32)",
+             "tensor(string)"},
             "The input type must be a tensor of a numeric type, either [N,C] or [C]. The output type will be of the same tensor type and shape.")
         .Attr(
             "imputed_value_floats",
@@ -313,7 +314,17 @@ ONNX_ML_OPERATOR_SET_SCHEMA(
             "replaced_value_int64",
             "A value that needs replacing.",
             AttributeProto::INT,
-            static_cast<int64_t>(0)));
+            static_cast<int64_t>(0))
+        .Attr(
+            "imputed_value_strings",
+            "Value(s) to change to.",
+            AttributeProto::STRINGS,
+            OPTIONAL_VALUE)
+        .Attr(
+            "replaced_value_string",
+            "A value that needs replacing.",
+            AttributeProto::STRING,
+            OPTIONAL_VALUE));
 
 static const char* LabelEncoder_ver2_doc = R"DOC(
     Maps each element in the input tensor to another value.<br>
