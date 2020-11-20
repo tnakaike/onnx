@@ -1283,11 +1283,11 @@ ONNX_ML_OPERATOR_SET_SCHEMA(
         .Attr(
             "keys_upper_strings",
             "Upper keys of each rage",
-            AttributeProto::STRING)
+            AttributeProto::STRINGS)
         .Attr(
             "keys_lower_strings",
             "Lower keys of each rage",
-            AttributeProto::STRING)
+            AttributeProto::STRINGS)
         .Attr(
             "values_float",
             "Values for each rage",
