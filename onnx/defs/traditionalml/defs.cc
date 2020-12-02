@@ -1206,15 +1206,15 @@ ONNX_ML_OPERATOR_SET_SCHEMA(
             AttributeProto::STRING,
             OPTIONAL_VALUE));
 
-static const char* ConcatStr_ver1_doc = R"DOC(
+static const char* StringConcat_ver1_doc = R"DOC(
     Concatenate strings.<br>
 )DOC";
 
 ONNX_ML_OPERATOR_SET_SCHEMA(
-    ConcatStr,
+    StringConcat,
     1,
     OpSchema()
-        .SetDoc(ConcatStr_ver1_doc)
+        .SetDoc(StringConcat_ver1_doc)
         .Input(0, "X", "Strings to be concatenated.", "T")
         .Input(1, "Y", "Strings to be concatenated.", "T")
         .Output(0, "Z", "Concatenated strings", "T")
@@ -1300,15 +1300,15 @@ ONNX_ML_OPERATOR_SET_SCHEMA(
           propagateShapeFromInputToOutput(ctx, 0, 0);
         }));
 
-static const char* SplitStr_ver1_doc = R"DOC(
+static const char* StringSplit_ver1_doc = R"DOC(
     Split each string in a tensor.<br>
 )DOC";
 
 ONNX_ML_OPERATOR_SET_SCHEMA(
-    SplitStr,
+    StringSplit,
     1,
     OpSchema()
-        .SetDoc(SplitStr_ver1_doc)
+        .SetDoc(StringSplit_ver1_doc)
         .Input(0, "X", "Strings to be concatenated.", "T")
         .Output(0, "Z", "A part of a split string", "T")
         .TypeConstraint(
